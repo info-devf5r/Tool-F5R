@@ -3,6 +3,7 @@ from main.style import *
 from tool.tts import *
 from tool.ports import *
 from tool.base64 import *
+from tool.check.Potin import *
 
 RC, GC, YC, CC, DF = '\033[1;31m', '\033[1;32m', '\033[1;33m', '\033[1;36m', '\033[1;37m'
 
@@ -17,9 +18,9 @@ def menu1():
             {GC}╱╱{RC}┃┃┃╰╯┃╰╯┃╰╮╰━━╯┃┃┃╰╮
             {GC}╱╱{RC}╰╯╰━━┻━━┻━╯{GC}╱╱╱╱{RC}╰╯╰━╯{DF}''')
 	vers()
-	print(f"                   {YC}Main Menu{DF}\n")
-	print(f"  {GC}[{YC}1{GC}] {RC}Text To Speech         {GC}[{YC}2{GC}] {RC}Port Scanner{DF}\n")
-	print(f"  {GC}[{YC}3{GC}] {RC}Base64 Encode          {GC}[{YC}4{GC}] {RC}Base64 Decode{DF}\n")
+	print(f"                   {YC}القائمة الرئيسية{DF}\n")
+	print(f"  {GC}[{YC}1{GC}] {RC}النص إلى الكلام         {GC}[{YC}2{GC}] {RC}ماسح المنفذ{DF}\n")
+	print(f"  {GC}[{YC}3{GC}] {RC}ترميز Base64          {GC}[{YC}4{GC}] {RC}فك تشفير Base64{DF}\n")
 	print(f"                 {GC}[{YC}+{GC}] {RC}Credit")
 	print(f"                  {GC}[{YC}0{GC}] {RC}Exit")
 	
@@ -35,7 +36,7 @@ def menu1():
 	elif option == "0":
 		system("clear")
 	else:
-		print(f"           {YC}Please Enter Right Input {DF}")
+		print(f"           {YC}الرجاء إدخال الإدخال الصحيح {DF}")
 		sleep(8)
 		menu1()
 		exit()

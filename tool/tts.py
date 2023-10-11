@@ -18,12 +18,12 @@ def textspeech():
             {GC}╱╱{RC}┃┃┃╰╯┃╰╯┃╰╮╰━━╯┃┃┃╰╮
             {GC}╱╱{RC}╰╯╰━━┻━━┻━╯{GC}╱╱╱╱{RC}╰╯╰━╯{DF}''')
 	vers()
-	ttst = input(f"{GC}input text for create Text to speech mp3 file \n  {YC}>>>{DF} ")
-	ttsn = input(f"\n{GC}Enter name for output mp3 with .mp3 \n   {YC}>>>{DF} ")
+	ttst = input(f"{GC}إدخال النص لإنشاء ملف تحويل النص إلى كلام mp3 \n  {YC}>>>{DF} ")
+	ttsn = input(f"\n{GC}أدخل اسمًا لإخراج mp3 بامتداد .mp3 \n   {YC}>>>{DF} ")
 
 	tts = gtts.gTTS(ttst, lang='en')
 
 	tts.save(ttsn)
 	os.system('play-audio' + ' ' + ttsn)
-	print(f'{RC}audio file save in current directory as{DF} ',ttsn)
+	print(f'{RC}حفظ الملف الصوتي في الدليل الحالي باسم{DF} ',ttsn)
 	sleep(5)
