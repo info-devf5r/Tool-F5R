@@ -18,12 +18,26 @@ pip install -r requirements.txt
 ```
 
 ```base
-python Tool-F5R.py
+python3 Tool-F5R.py
+```
+
+
+
+## check-host
+
+
+```base
+cd tTool-F5R/tool/check
+```
+
+```base
+cd tool/check
 ```
 
 ```base
 python3 Potin.py list.txt
 ```
+
 
 ## Contributing
 طلبات السحب هي موضع ترحيب. لإجراء تغييرات كبيرة، يرجى فتح مشكلة أولاً لمناقشة ما تريد تغييره.
