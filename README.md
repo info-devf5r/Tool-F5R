@@ -27,7 +27,7 @@ python3 Tool-F5R.py
 
 
 ```base
-cd tTool-F5R/tool/check
+cd Tool-F5R/tool/check
 ```
 
 ```base
