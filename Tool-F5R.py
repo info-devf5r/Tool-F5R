@@ -69,7 +69,7 @@ for line in lines:
       print("\nOutput saved in : " + filename + '\n')
       exit()
     
-    # Printing the results
+    # طباعة النتائج
     if (r.status_code == 200):
     	try:
         	print("\n", '\x1b[6;30;42m' '[OK]200', bcolors.ENDC, ':' , url,r.headers['server'])
