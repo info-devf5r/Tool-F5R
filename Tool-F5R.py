@@ -1,14 +1,25 @@
+#!/usr/bin/python
+# Author : Mo3taz Potin
+# @Icanflyy1
+#Account link https://t.me/Icanflyy1
+#Feel free to ask me ...
+# version : 1.1
+
 import requests,sys
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
 
+print("     __  __            ")            
+print("     \ \/ /     _ __ __ _ _   _   ")
+print("      \  /_____| '__/ _` | | | |    ")
+print("      /  \_____| | | (_| | |_| |   ")
+print("     /_/\_\    |_|  \__,_|\__, |    ")
+print("                         |___/       ")
 
-print("www.devf5r.com")
-
-print("   Happy Scanning Script by: Abbas Aleinzy")
-print("             @devf5r             	")   
-print("      https://t.me/devf5r   	")  
+print("   Happy Scanning Script by: Mo3taz Potin")
+print("             @Icanflyy1             	")   
+print("      https://t.me/Icanflyy1   	")  
 
 # COLORS #
 class bcolors:
@@ -46,9 +57,9 @@ for line in lines:
         url = 'http://' + line.strip()
       
       s = requests.Session()
-      retry = Retry(connect=1, backoff_factor=0.5)
+#      retry = Retry(connect=1, backoff_factor=0.5)
       
-      s.mount('http://github.com', HTTPAdapter(max_retries=1))
+#      s.mount('http://github.com', HTTPAdapter(max_retries=1))
       r = s.head(url, timeout=1)
       response = r.headers
   
@@ -69,7 +80,7 @@ for line in lines:
       print("\nOutput saved in : " + filename + '\n')
       exit()
     
-    # طباعة النتائج
+    # Printing the results
     if (r.status_code == 200):
     	try:
         	print("\n", '\x1b[6;30;42m' '[OK]200', bcolors.ENDC, ':' , url,r.headers['server'])
