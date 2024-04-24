@@ -9,7 +9,7 @@ import requests,sys
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-
+output_file = "urls.txt"
 print("     __  __            ")            
 print("     \ \/ /     _ __ __ _ _   _   ")
 print("      \  /_____| '__/ _` | | | |    ")
@@ -81,6 +81,13 @@ for line in lines:
       exit()
     
     # Printing the results
+    for host in hosts:
+        try:
+            # احصل على عنوان IP باستخدام الدالة gethostbyname()
+            ip = socket.gethostbyname(host)
+            file.write(f"{ip}\n")
+        except socket.error:
+            file.write(f"لا يمكن العثور على عنوان IP لـ {host}\n")
     if (r.status_code == 200):
     	try:
         	print("\n", '\x1b[6;30;42m' '[OK]200', bcolors.ENDC, ':' , url,r.headers['server'])
