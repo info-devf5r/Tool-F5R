@@ -1,25 +1,8 @@
-#!/usr/bin/python
-# Author : Mo3taz Potin
-# @Icanflyy1
-#Account link https://t.me/Icanflyy1
-#Feel free to ask me ...
-# version : 1.1
+import requests
+import sys
+import socket
 
-import requests,sys
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
-
-output_file = "urls.txt"
-print("     __  __            ")            
-print("     \ \/ /     _ __ __ _ _   _   ")
-print("      \  /_____| '__/ _` | | | |    ")
-print("      /  \_____| | | (_| | |_| |   ")
-print("     /_/\_\    |_|  \__,_|\__, |    ")
-print("                         |___/       ")
-
-print("   Happy Scanning Script by: Mo3taz Potin")
-print("             @Icanflyy1             	")   
-print("      https://t.me/Icanflyy1   	")  
+print("      https://t.me/Icanflyy1   	")
 
 # COLORS #
 class bcolors:
@@ -34,86 +17,101 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-if (len(sys.argv) != 2):
-  print("\n Error: Type python3 potin.py yourfile.txt\n")
-  sys.exit()
-
+if len(sys.argv) != 2:
+    print("\n Error: Type python3 potin.py yourfile.txt\n")
+    sys.exit()
 else:
-  f = open(sys.argv[1],'r') 
-  lines = f.readlines()
-  f.close()
+    f = open(sys.argv[1], 'r')
+    lines = f.readlines()
+    f.close()
 
-  filename = 'potin_files/' + sys.argv[1].replace('../','') + '_output.txt'
-  out = open(filename, 'w+')
+    filename = 'potin_files/' + sys.argv[1].replace('../', '') + '_output.txt'
+    ip_filename = 'potin_files/ip.txt'
+    out = open(filename, 'w+')
+    ip_out = open(ip_filename, 'w+')
 
-  
 for line in lines:
     try:
-      
-      if 'http://' in line.strip() or 'https://' in line.strip():
-        url = line.strip()
-      else:
-        
-        url = 'http://' + line.strip()
-      
-      s = requests.Session()
-#      retry = Retry(connect=1, backoff_factor=0.5)
-      
-#      s.mount('http://github.com', HTTPAdapter(max_retries=1))
-      r = s.head(url, timeout=1)
-      response = r.headers
-  
-      out.write(url + ':' + str(r.status_code) + '\n')
+        if 'http://' in line.strip() or 'https://' in line.strip():
+            url = line.strip()
+        else:
+            url = 'http://' + line.strip()
+
+        s = requests.Session()
+        r = s.head(url, timeout=1)
+        response = r.headers
+
+        out.write(url + ':' + str(r.status_code) + '\n')
+
+        if r.status_code == 200:
+            ip = socket.gethostbyname(url.replace('http://', '').replace('https://', ''))
+            ip_out.write(ip + '\n')
+
+            try:
+                print("\n", '\x1b[6;30;42m', '[OK]200', bcolors.ENDC, ':', url, r.headers['server'])
+                print("IP Address:", ip)
+            except KeyError:
+                print('Server not found')
+                print("IP Address:", ip)
+
+        if r.status_code == 308:
+            ip = socket.gethostbyname(url.replace('http://', '').replace('https://', ''))
+            ip_out.write(ip + '\n')
+
+            try:
+                print("\n", '\x1b[6;39;40m', '[308]', bcolors.OKBLUE, ':', url, r.headers['server'])
+                print("IP Address:", ip)
+            except KeyError:
+                print('Server not found')
+                print("IP Address:", ip)
+
+        if r.status_code == 302:
+            ip = socket.gethostbyname(url.replace('http://', '').replace('https://', ''))
+            ip_out.write(ip + '\n')
+
+            print('\n', bcolors.FAIL, r.status_code, ' : ', url, r.headers)
+            print("IP Address:", ip)
+
+        if r.status_code == 301:
+            ip = socket.gethostbyname(url.replace('http://', '').replace('https://', ''))
+            ip_out.write(ip + '\n')
+
+            try:
+                print("\n", '\x1b[6;39;40m', '[301]', bcolors.OKCYAN, ':', url, r.headers['server'])
+                print("IP Address:", ip)
+            except KeyError:
+                print('Server not found')
+                print("IP Address:", ip)
+
+        if r.status_code == 403:
+            ip = socket.gethostbyname(url.replace('http://', '').replace('https://', ''))
+            ip_out.write(ip + '\n')
+
+            try:
+                print("\n", '\x1b[6;39;40m', '[403]', bcolors.OKGREEN, ':', url, r.headers['server'])
+                print("IP Address:", ip)
+            except KeyError:
+                print('Server not found')
+                print("IP Address:", ip)
 
     except requests.ConnectionError as e:
-      print("\n", bcolors.ENDC + url + bcolors.FAIL + " Failed to connect ")
-      continue
+        print("\n", bcolors.ENDC + url + bcolors.FAIL + " Failed to connect ")
+        continue
     except requests.Timeout as e:
         print("[!] : Timeout Error")
         continue
     except requests.RequestException as e:
         print("[!] : General Error")
         continue
-    
-    except KeyboardInterrupt:
-      out.close()
-      print("\nOutput saved in : " + filename + '\n')
-      exit()
-    
-    # Printing the results
-    for host in hosts:
-        try:
-            # احصل على عنوان IP باستخدام الدالة gethostbyname()
-            ip = socket.gethostbyname(host)
-            file.write(f"{ip}\n")
-        except socket.error:
-            file.write(f"لا يمكن العثور على عنوان IP لـ {host}\n")
-    if (r.status_code == 200):
-    	try:
-        	print("\n", '\x1b[6;30;42m' '[OK]200', bcolors.ENDC, ':' , url,r.headers['server'])
-    	except KeyError:
-    		print('server not found')
-    
-    if (r.status_code == 308):
-    	try:
-    		print("\n", '\x1b[6;39;40m' '[308]',bcolors.OKBLUE, ':' , url,r.headers['server'])
-    	except KeyError:
-    		print('server not found')
-    		    
-    if (r.status_code == 302):
-       		print('\n', bcolors.FAIL, r.status_code, ' : ' , url,r.headers)
 
-    if (r.status_code == 301):
-    	try:
-    		print("\n", '\x1b[6;39;40m' '[301]',bcolors.OKCYAN, ':' , url,r.headers['server'])
-    	except KeyError:
-    		print('server not found')
-    
-    if (r.status_code == 403):
-    	try:
-    		print("\n", '\x1b[6;39;40m' '[403]',bcolors.OKGREEN, ':' , url,r.headers['server'])
-    	except KeyError:
-    		print('server not found')
-    		  
-print("\nOutput saved in : " + filename + '\n')
+    except KeyboardInterrupt:
+        out.close()
+        ip_out.close()
+        print("\nOutput saved in: " + filename)
+        print("IP addresses saved in: " + ip_filename)
+        exit()
+
+print("\nOutput saved in: " + filename)
+print("IP addresses saved in: " + ip_filename)
 out.close()
+ip_out.close
